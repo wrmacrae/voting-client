@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+import Voting from './components/Voting'
+
+const pair = ['Frozen', 'Coco'];
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Voting pair={pair} />
   </React.StrictMode>,
   document.getElementById('root')
 );
