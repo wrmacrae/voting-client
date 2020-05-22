@@ -1,10 +1,16 @@
 import React from 'react';
-import {fromJS} from 'immutable'
+import {
+  HashRouter,
+  Route
+} from 'react-router-dom';
+import Results from './Results';
+import Voting from './Voting';
 
-const pair = fromJS(['Frozen', 'Inside Out'])
-
-export default class App extends React.PureComponent {
+export default class App extends React.Component {
   render() {
-    return React.cloneElement(this.props.children, {pair: pair});
+    return (<HashRouter>
+      <Route path="/results" component={Results} />
+      <Route path="/" component={Voting} />
+    </HashRouter>);
   }
 };

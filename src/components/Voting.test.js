@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
-import Voting from '../../src/components/Voting';
+import { Voting } from '../../src/components/Voting';
 import { fromJS } from 'immutable';
 
 describe('Voting', () => {
