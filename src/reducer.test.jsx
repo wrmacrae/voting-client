@@ -1,5 +1,4 @@
 import {fromJS} from 'immutable';
-import {expect} from 'chai';
 
 import reducer from './reducer';
 
@@ -18,7 +17,7 @@ describe('reducer', () => {
     };
     const nextState = reducer(undefined, action);
 
-    expect(nextState).to.eql(fromJS({
+    expect(nextState).toEqual(fromJS({
       vote: {
         pair: ['Frozen', 'Coco'],
         tally: {'Frozen': 2}
@@ -30,7 +29,7 @@ describe('reducer', () => {
     const initialState = fromJS({
       vote: {
         pair: ['Frozen', 'Coco'],
-        tally: {'Frozen': 1}
+        tally: {'Frozen': 2}
       }
     });
     const action = {
@@ -39,12 +38,12 @@ describe('reducer', () => {
     };
     const nextState = reducer(initialState, action);
 
-    expect(nextState).to.eql(fromJS({
+    expect(nextState).toEqual(fromJS({
       vote: {
         pair: ['Frozen', 'Coco'],
-        tally: {'Frozen': 2},
-        hasVoted: 'Frozen'
-      }
+        tally: {'Frozen': 2}
+      },
+      hasVoted: 'Frozen'
     }));
   });
 
@@ -61,7 +60,7 @@ describe('reducer', () => {
     };
     const nextState = reducer(initialState, action);
 
-    expect(nextState).to.eql(fromJS({
+    expect(nextState).toEqual(fromJS({
       vote: {
         pair: ['Frozen', 'Coco'],
         tally: {'Frozen': 2}
