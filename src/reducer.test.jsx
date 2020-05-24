@@ -67,4 +67,29 @@ describe('reducer', () => {
       }
     }));
   });
+
+  it('removes hasVoted during SET_STATE if pair changes', () => {
+    const initialState = fromJS({
+      vote: {
+        pair: ['Frozen', 'Coco'],
+        tally: {'Frozen': 2}
+      },
+      hasVoted: 'Frozen'
+    });
+    const action = {
+      type: 'SET_STATE',
+      state: fromJS({
+        vote: {
+          pair: ['Star Wars', 'Up']
+        }
+      })
+    };
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).toEqual(fromJS({
+      vote: {
+          pair: ['Star Wars', 'Up']
+      }
+    }));
+  });
 });

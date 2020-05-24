@@ -7,8 +7,8 @@ export class Results extends React.PureComponent {
     return this.props.pair || [];
   }
   getVotes(entry) {
-    if (this.props.tally && this.props.tally[entry]) {
-      return this.props.tally[entry];
+    if (this.props.tally && this.props.tally.has(entry)) {
+      return this.props.tally.get(entry);
     }
     return 0;
   }

@@ -19,7 +19,7 @@ describe('Results', () => {
     let nextInvoked = false;
     const next = () => nextInvoked = true;
     const pair = fromJS(['Frozen', 'Coco']);
-    const component = render(<Results pair={pair} tally={fromJS({})} next={next} />);
+    const component = render(<Results pair={pair} next={next} />);
     fireEvent(
       screen.getByRole('button'),
       new MouseEvent('click', {

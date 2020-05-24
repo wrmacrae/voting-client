@@ -1,6 +1,9 @@
 import {fromJS} from 'immutable';
 
 function setState(state, newState) {
+  if (state.getIn(['vote', 'pair']) != newState.getIn(['vote'], ['pair']) && state.get('hasVoted')) {
+    return state.merge(newState).delete('hasVoted');
+  }
   return state.merge(newState);
 }
 
