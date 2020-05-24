@@ -15,34 +15,57 @@ describe('reducer', () => {
           tally: {'Frozen': 2}
         }
       })
-    }
+    };
     const nextState = reducer(undefined, action);
 
     expect(nextState).to.eql(fromJS({
-        vote: {
-          pair: ['Frozen', 'Coco'],
-          tally: {'Frozen': 2}
-        }
-      }))
+      vote: {
+        pair: ['Frozen', 'Coco'],
+        tally: {'Frozen': 2}
+      }
+    }));
   });
 
   it('handles VOTE by setting hasVoted', () => {
     const initialState = fromJS({
-      pair: ['Frozen', 'Coco'],
-      tally: {'Frozen': 1}
+      vote: {
+        pair: ['Frozen', 'Coco'],
+        tally: {'Frozen': 1}
+      }
     });
     const action = {
       type: 'VOTE',
       entry: 'Frozen'
-    }
+    };
     const nextState = reducer(initialState, action);
 
     expect(nextState).to.eql(fromJS({
-        vote: {
-          pair: ['Frozen', 'Coco'],
-          tally: {'Frozen': 2},
-          hasVoted: true          
-        }
-      }))
+      vote: {
+        pair: ['Frozen', 'Coco'],
+        tally: {'Frozen': 2},
+        hasVoted: 'Frozen'
+      }
+    }));
+  });
+
+  it('does not set hasVoted for invalid VOTE entry', () => {
+    const initialState = fromJS({
+      vote: {
+        pair: ['Frozen', 'Coco'],
+        tally: {'Frozen': 2}
+      }
+    });
+    const action = {
+      type: 'VOTE',
+      entry: 'Star Wars'
+    };
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).to.eql(fromJS({
+      vote: {
+        pair: ['Frozen', 'Coco'],
+        tally: {'Frozen': 2}
+      }
+    }));
   });
 });
