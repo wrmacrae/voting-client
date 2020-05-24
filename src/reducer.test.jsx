@@ -25,4 +25,24 @@ describe('reducer', () => {
         }
       }))
   });
+
+  it('handles VOTE by setting hasVoted', () => {
+    const initialState = fromJS({
+      pair: ['Frozen', 'Coco'],
+      tally: {'Frozen': 1}
+    });
+    const action = {
+      type: 'VOTE',
+      entry: 'Frozen'
+    }
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).to.eql(fromJS({
+        vote: {
+          pair: ['Frozen', 'Coco'],
+          tally: {'Frozen': 2},
+          hasVoted: true          
+        }
+      }))
+  });
 });
