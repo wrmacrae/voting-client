@@ -1,6 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Winner from './Winner'
+import * as actionCreators from '../action_creators'
+
+export const VOTE_WIDTH_PERCENT = 8;
 
 export class Results extends React.PureComponent {
   getPair() {
@@ -12,6 +15,9 @@ export class Results extends React.PureComponent {
     }
     return 0;
   }
+  getVotesBlockWidth(entry) {
+    return (this.getVotes(entry) * VOTE_WIDTH_PERCENT) + '%';
+  }
   render() {
     return this.props.winner ?
       <Winner ref="winner" winner={this.props.winner} /> :
@@ -20,6 +26,11 @@ export class Results extends React.PureComponent {
           {this.getPair().map(entry =>
             <div className="entry" key={entry}>
               <h1>{entry}</h1>
+              <div className="voteVisualization">
+                <div className="votesBlock"
+                     style={{width: this.getVotesBlockWidth(entry)}}>
+                </div>
+              </div>
               <div className="voteCount">
                 {this.getVotes(entry)}
               </div>
@@ -45,4 +56,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Results);
+export default connect(mapStateToProps, actionCreators)(Results);

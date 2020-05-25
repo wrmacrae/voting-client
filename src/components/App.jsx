@@ -10,7 +10,7 @@ export default class App extends React.Component {
   render() {
     return (<HashRouter>
       <Route path="/results" component={Results} />
-      <Route path="/" component={Voting} />
+      <Route exact path="/" component={Voting} />
     </HashRouter>);
   }
 };

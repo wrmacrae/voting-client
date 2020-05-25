@@ -1,10 +1,12 @@
 import {fromJS} from 'immutable';
 
 function setState(state, newState) {
-  if (state.getIn(['vote', 'pair']) != newState.getIn(['vote'], ['pair']) && state.get('hasVoted')) {
-    return state.merge(newState).delete('hasVoted');
+  const oldPair = state.getIn(['vote', 'pair']);
+  const newPair = newState.getIn(['vote', 'pair']);
+  if (state.get('hasVoted') === null || (oldPair && newPair && oldPair.toString() === newPair.toString())) {
+    return state.merge(newState);
   }
-  return state.merge(newState);
+  return state.delete('hasVoted').merge(newState);
 }
 
 function vote(state, entry) {
@@ -18,9 +20,10 @@ function vote(state, entry) {
 export default function(state = fromJS({}), action) {
   switch(action.type) {
   case 'SET_STATE':
-    return setState(state, action.state)
+    return setState(state, fromJS(action.state))
   case 'VOTE':
     return vote(state, action.entry)
+  default:
+    return state;
   }
-  return state;
 }
